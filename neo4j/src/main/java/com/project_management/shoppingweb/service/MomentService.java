@@ -1,9 +1,8 @@
 package com.project_management.shoppingweb.service;
 
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Moment;
-import com.project_management.shoppingweb.pojo.vo.RequestResultVO;
-import org.springframework.stereotype.Service;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
+import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 
 public interface MomentService {
   public RequestResultVO insert(Moment moment);

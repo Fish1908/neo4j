@@ -1,6 +1,6 @@
-package com.project_management.shoppingweb.repository;
+package com.project_management.shoppingweb.dao.repository;
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Person;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.stereotype.Repository;

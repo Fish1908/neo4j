@@ -1,6 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Moment;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.service.MomentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

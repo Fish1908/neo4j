@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.pojo.nodeEntity;
+package com.project_management.shoppingweb.dao.pojo.nodeEntity;
 
 import java.util.ArrayList;
 import java.util.List;

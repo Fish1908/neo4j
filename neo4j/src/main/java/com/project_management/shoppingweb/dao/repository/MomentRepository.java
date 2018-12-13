@@ -1,10 +1,8 @@
-package com.project_management.shoppingweb.repository;
+package com.project_management.shoppingweb.dao.repository;
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Moment;
-import java.util.List;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
-import org.springframework.stereotype.Repository;
 
 public interface MomentRepository extends GraphRepository <Moment>{
 

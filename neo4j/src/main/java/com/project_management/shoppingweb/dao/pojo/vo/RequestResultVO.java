@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.pojo.vo;
+package com.project_management.shoppingweb.dao.pojo.vo;
 
 public class RequestResultVO implements java.io.Serializable {
     /**

@@ -1,7 +1,7 @@
 package com.project_management.shoppingweb;
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Person;
-import com.project_management.shoppingweb.repository.PersonRepository;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
+import com.project_management.shoppingweb.dao.repository.PersonRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
