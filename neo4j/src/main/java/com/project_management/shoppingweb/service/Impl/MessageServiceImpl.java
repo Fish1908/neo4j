@@ -1,9 +1,9 @@
 package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
-import com.project_management.shoppingweb.pojo.nodeEntity.Message;
-import com.project_management.shoppingweb.pojo.vo.RequestResultVO;
-import com.project_management.shoppingweb.repository.MessageRepository;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Message;
+import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
+import com.project_management.shoppingweb.dao.repository.MessageRepository;
 import com.project_management.shoppingweb.service.MessageService;
 import com.project_management.shoppingweb.service.common.ResultBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

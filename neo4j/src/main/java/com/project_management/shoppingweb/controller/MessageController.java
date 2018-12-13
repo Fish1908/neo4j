@@ -1,17 +1,13 @@
 package com.project_management.shoppingweb.controller;
 
 
-import com.project_management.shoppingweb.pojo.nodeEntity.Message;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Message;
 import com.project_management.shoppingweb.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController
