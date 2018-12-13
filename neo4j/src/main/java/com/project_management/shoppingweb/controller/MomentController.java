@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MomentController {
 
   @Autowired
+
   private MomentService momentService;
 
   @RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -41,8 +42,8 @@ public class MomentController {
   }
 
   @RequestMapping(value = "/find", method = RequestMethod.GET)
-  public Object find(@RequestParam Long momentId) {
-    return momentService.find(momentId);
+  public Object find(@RequestBody Moment moment) {
+    return momentService.find(moment.getMomentId());
   }
 
   @RequestMapping(value = "/findOne", method = RequestMethod.GET)

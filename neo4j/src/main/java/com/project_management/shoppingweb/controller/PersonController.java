@@ -46,9 +46,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public Object find(@RequestParam("id") Long id){
+    public Object find(@RequestBody Person person){
 
-        return personService.find(id);
+        return personService.find(person.getId());
     }
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Object update(@RequestBody Person person)
