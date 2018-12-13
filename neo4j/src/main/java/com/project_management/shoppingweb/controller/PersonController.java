@@ -1,21 +1,25 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.dao.nodeEntity.Person;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping(value = "/person")
 public class PersonController {
     @Autowired
     private PersonService personService;
 
     /**
-     * 新增卡包信息
+     *
+     *
+     * @param person
+     * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Object insert(@RequestBody Person person){
@@ -23,10 +27,28 @@ public class PersonController {
     }
 
     /**
-     * 新增卡包信息
+     *
+     * @param name
+     * @return
      */
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public Object test(@RequestBody Person person){
-        return 1;
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public Object delete(@RequestParam("name") String name){
+
+        return personService.delete(name);
     }
+
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public Object find(@RequestParam("id") Long id){
+
+        return personService.find(id);
+    }
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public Object update(@RequestBody Person person)
+    {
+        return  personService.update(person);
+    }
+
+
 }
