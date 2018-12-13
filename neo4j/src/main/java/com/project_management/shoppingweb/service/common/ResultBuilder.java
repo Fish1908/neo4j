@@ -1,11 +1,7 @@
 package com.project_management.shoppingweb.service.common;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
-import com.project_management.shoppingweb.dao.vo.RequestResultVO;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.project_management.shoppingweb.pojo.vo.RequestResultVO;
 
 
 /**
