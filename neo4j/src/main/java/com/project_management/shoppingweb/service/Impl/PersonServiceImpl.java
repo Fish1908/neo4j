@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -65,4 +66,11 @@ public class PersonServiceImpl implements PersonService {
         }
 
     }
+
+    @Override
+    public Object addfriend(NameNode nameNode) {
+        return null;
+    }
+
+
 }
