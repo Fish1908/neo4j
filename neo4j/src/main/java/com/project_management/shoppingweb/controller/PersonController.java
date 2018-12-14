@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/addfriend",method = RequestMethod.POST)
-    public Object addFriend(@RequestParam("myname") String myname, @RequestParam("friendname") String friendname) {
-        return personService.addFriend(myname,friendname);
+    public Object addFriend(@RequestBody NameNode nameNode) {
+        return personService.addFriend(nameNode);
     }
 }

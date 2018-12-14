@@ -2,6 +2,10 @@ package com.project_management.shoppingweb.dao.pojo.nodeEntity;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity(label = "person")
 public class Person {
@@ -12,6 +16,10 @@ public class Person {
   private String password;
   private String sex;
   private String classNumber;
+
+
+  @Relationship(type = "friends", direction = Relationship.UNDIRECTED)
+  public Set<Person> friends = new HashSet<>();
 
 
   private Person() {
@@ -68,4 +76,6 @@ public class Person {
         ", classNumber='" + classNumber + '\'' +
         '}';
   }
+
+
 }

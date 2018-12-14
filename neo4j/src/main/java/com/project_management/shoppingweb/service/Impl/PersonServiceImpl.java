@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -21,8 +22,6 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    @Relationship(type = "friends", direction = Relationship.UNDIRECTED)
-    public Set<Person> friends = new HashSet<>();
 
     @Override
     public RequestResultVO insert(Person person) {
@@ -74,16 +73,16 @@ public class PersonServiceImpl implements PersonService {
 
     }
     @Override
-    public RequestResultVO addFriend(String myname, String friendname) {
+    public RequestResultVO addFriend(NameNode nameNode) {
 
-        Person friend = personRepository.findByName(friendname);
-        Person me = personRepository.findByName(myname);
+        Person friend = personRepository.findByName(nameNode.getFriendname());
+        Person me = personRepository.findByName(nameNode.getMyname());
         if (friend == null || me == null) {
             return ResultBuilder.buildFailResult("找不到此人");
         } else {
-            friends.add(me);
-            friends.add(friend);
-            personRepository.save(friends);
+            me.friends.add(me);
+            me.friends.add(friend);
+            personRepository.save(me.friends);
             return ResultBuilder.buildSuccessResult("success");
         }
     }
