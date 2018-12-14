@@ -13,7 +13,8 @@ public interface PersonService {
     public RequestResultVO delete(String name);
     public RequestResultVO update(Person person);
     public RequestResultVO find(Long id);
-//    public RequestResultVO findByName(String name);
+    public Object findByName(String name);
+    public Object addregister(Person loginPerson);
 
 
 }

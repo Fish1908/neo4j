@@ -43,7 +43,7 @@ public class MomentServiceImpl implements MomentService {
 
   @Override
   public RequestResultVO find(Long momentId) {
-    Moment moment= momentRepository.findByMomentId(momentId);
+    Moment moment= momentRepository.findOne(momentId);
     return ResultBuilder.buildSuccessResult(moment);
 
   }
