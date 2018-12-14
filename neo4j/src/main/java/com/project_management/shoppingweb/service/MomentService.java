@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.service;
 
 
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.AddMomentNode;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 
 public interface MomentService {
@@ -12,5 +13,6 @@ public interface MomentService {
   public RequestResultVO findOne(Long momentId);
   public RequestResultVO findByMomentId(Long momentId);
 
+  public Object addMoment(AddMomentNode addMomentNode);
 
 }
