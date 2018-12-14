@@ -1,9 +1,7 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.constant.HttpResponseConstants;
-import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
-import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/person")

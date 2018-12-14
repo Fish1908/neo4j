@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.dao.pojo.nodeEntity;
+package com.project_management.shoppingweb.dao.pojo.requestEntity;
 
 /**
  * <p>Title: NameNode</p>

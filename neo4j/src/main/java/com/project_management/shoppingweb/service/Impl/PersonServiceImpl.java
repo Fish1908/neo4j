@@ -1,7 +1,7 @@
 package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
-import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -9,9 +9,6 @@ import com.project_management.shoppingweb.service.PersonService;
 import com.project_management.shoppingweb.service.common.ResultBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -69,7 +66,16 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Object addfriend(NameNode nameNode) {
-        return null;
+        Person me = personRepository.findByName(nameNode.getMyname());
+        Person myFriend = personRepository.findByName(nameNode.getFriendname());
+        if (me == null || myFriend == null) {
+            return ResultBuilder.buildFailResult("找不到此人");
+        }
+        else {
+            me.friends.add(myFriend);
+            personRepository.save(me);
+            return ResultBuilder.buildSuccessResult("success");
+        }
     }
 
 

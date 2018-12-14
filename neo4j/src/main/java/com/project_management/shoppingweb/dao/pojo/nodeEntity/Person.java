@@ -17,8 +17,8 @@ public class Person {
   private String sex;
   private String classNumber;
 
-  @Relationship(type = "friends")
-  private Set<Person> friends = new HashSet<Person>();
+  @Relationship(type = "friends",direction = Relationship.UNDIRECTED)
+  public Set<Person> friends = new HashSet<Person>();
 
   private Person() {
     // Empty constructor required as of Neo4j API 2.0.5
