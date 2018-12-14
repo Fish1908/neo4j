@@ -61,4 +61,8 @@ public class PersonController {
         return personService.addregister(loginPerson);
     }
 
+    public Object test(){
+        return null;
+    }
+
 }
