@@ -16,5 +16,7 @@ public interface PersonService {
     public Object findByName(String name);
     public Object addregister(Person loginPerson);
 
+//    public RequestResultVO findByName(String name);
+    public RequestResultVO addFriend(String myname,String friendname);
 
 }

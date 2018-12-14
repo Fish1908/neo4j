@@ -6,16 +6,23 @@ import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
 import com.project_management.shoppingweb.service.PersonService;
 import com.project_management.shoppingweb.service.common.ResultBuilder;
+import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
+
+    @Relationship(type = "friends", direction = Relationship.UNDIRECTED)
+    public Set<Person> friends = new HashSet<>();
 
     @Override
     public RequestResultVO insert(Person person) {
@@ -40,6 +47,7 @@ public class PersonServiceImpl implements PersonService {
         return ResultBuilder.buildSuccessResult(person);
     }
 
+
     @Override
     public RequestResultVO findByName(String name) {
         Person person = personRepository.findByName(name);
@@ -57,12 +65,26 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findByName(name);
         //验证用户名是否已存在
         if (person != null) {
-            System.out.println(person.getName()+" " +person.getId()+" "+person.getClassNumber());
+            System.out.println(person.getName() + " " + person.getId() + " " + person.getClassNumber());
             return ResultBuilder.buildFailResult("用户已经注册");
         } else {
-             Person person1= personRepository.save(loginPerson);
-            return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_200,person1);
+            Person person1 = personRepository.save(loginPerson);
+            return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_200, person1);
         }
 
+    }
+    @Override
+    public RequestResultVO addFriend(String myname, String friendname) {
+
+        Person friend = personRepository.findByName(friendname);
+        Person me = personRepository.findByName(myname);
+        if (friend == null || me == null) {
+            return ResultBuilder.buildFailResult("找不到此人");
+        } else {
+            friends.add(me);
+            friends.add(friend);
+            personRepository.save(friends);
+            return ResultBuilder.buildSuccessResult("success");
+        }
     }
 }
