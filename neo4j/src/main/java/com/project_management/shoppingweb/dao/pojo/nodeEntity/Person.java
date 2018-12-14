@@ -2,6 +2,10 @@ package com.project_management.shoppingweb.dao.pojo.nodeEntity;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity(label = "person")
 public class Person {
@@ -13,6 +17,8 @@ public class Person {
   private String sex;
   private String classNumber;
 
+  @Relationship(type = "friends")
+  private Set<Person> friends = new HashSet<Person>();
 
   private Person() {
     // Empty constructor required as of Neo4j API 2.0.5

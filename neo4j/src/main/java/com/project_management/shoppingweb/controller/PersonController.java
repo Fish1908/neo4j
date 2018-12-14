@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.controller;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.service.PersonService;
@@ -59,6 +60,11 @@ public class PersonController {
     @RequestMapping(value = "/addregister", method = RequestMethod.POST)
     public Object addregister(@RequestBody Person loginPerson) {
         return personService.addregister(loginPerson);
+    }
+
+    @RequestMapping(value = "/addfriend", method = RequestMethod.POST)
+    public Object addfriend(@RequestBody NameNode nameNode) {
+        return personService.addfriend(nameNode);
     }
 
 }
