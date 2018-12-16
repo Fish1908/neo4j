@@ -51,12 +51,13 @@ public class MomentController {
   public Object findOne(@RequestParam Long momentId) {
     return momentService.findOne(momentId);
   }
+
   @RequestMapping(value = "/findByMomentId", method = RequestMethod.GET)
   public Object findByName(@RequestParam Long momentId) {
     return momentService.findByMomentId(momentId);
   }
 
-  @RequestMapping(value = "addMoment",method = RequestMethod.POST)
+  @RequestMapping(value = "/addMoment",method = RequestMethod.POST)
   private Object addMoment(@RequestBody AddMomentNode addMomentNode){
     return momentService.addMoment(addMomentNode);
   }

@@ -13,6 +13,6 @@ public interface MomentService {
   public RequestResultVO findOne(Long momentId);
   public RequestResultVO findByMomentId(Long momentId);
 
-  public Object addMoment(AddMomentNode addMomentNode);
+  public RequestResultVO addMoment(AddMomentNode addMomentNode);
 
 }

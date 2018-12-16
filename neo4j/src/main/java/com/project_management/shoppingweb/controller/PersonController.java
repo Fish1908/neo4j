@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
     @Autowired
     private PersonService personService;
-    private Person localPerson;
 
     /**
      *
@@ -30,18 +28,18 @@ public class PersonController {
 
     /**
      *
-     * @param name
+     * @param
      * @return
      */
 
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public Object delete(@RequestParam("name") String name){
+    public Object delete(@RequestBody() Person person){
 
-        return personService.delete(name);
+        return personService.delete(person.getName());
     }
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
     public Object find(@RequestBody Person person){
 
         return personService.find(person.getId());
@@ -60,6 +58,12 @@ public class PersonController {
     @RequestMapping(value = "/addfriend",method = RequestMethod.POST)
     public Object addfriend(@RequestBody NameNode nameNode){
         return personService.addfriend(nameNode);
+    }
+
+    @RequestMapping(value = "/findbyname", method = RequestMethod.POST)
+    public Object findbyname(@RequestBody Person person){
+
+        return personService.findByName(person.getName());
     }
 
 }

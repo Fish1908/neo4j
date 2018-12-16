@@ -68,12 +68,13 @@ public class MomentServiceImpl implements MomentService {
     }
 
     @Override
-    public Object addMoment(AddMomentNode addMomentNode) {
+    public RequestResultVO addMoment(AddMomentNode addMomentNode) {
         Moment moment = momentRepository.save(addMomentNode.getMoment());
         Person person = personRepository.findByName(addMomentNode.getName());
         person.moments.add(moment);
         personRepository.save(person);
         return ResultBuilder.buildSuccessResult(moment);
+
     }
 
 

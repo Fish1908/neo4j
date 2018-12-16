@@ -14,8 +14,8 @@ public interface PersonService {
     public RequestResultVO delete(String name);
     public RequestResultVO update(Person person);
     public RequestResultVO find(Long id);
-    public Object findByName(String name);
-    public Object addregister(Person loginPerson);
+    public RequestResultVO findByName(String name);
+    public RequestResultVO addregister(Person loginPerson);
 
-    public Object addfriend(NameNode nameNode);
+    public RequestResultVO addfriend(NameNode nameNode);
 }
