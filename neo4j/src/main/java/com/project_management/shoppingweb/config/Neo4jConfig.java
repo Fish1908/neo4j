@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -8,5 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableNeo4jRepositories(basePackages = "com.project_management.shoppingweb.dao.repository")
 @EnableTransactionManagement // 激活SDN隐式事务
 public class Neo4jConfig {
+
 
 }
