@@ -6,7 +6,7 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 
 public interface MomentRepository extends GraphRepository <Moment>{
 
-  @Query("MATCH ((p:person)-[v:viewpyq]->(m:moment)) where id(m)={1} and p.name={0} DELETE v,m")
+  @Query("MATCH ((p:person)-[v:Viewpyq]->(m:moment)) where id(m)={1} and p.name={0} DELETE v,m")
   void delete(String personName, Long id);
 //  @Query("MATCH (m:moment) where id(m)={0} return m")
   Moment findByMomentId(Long momentId);

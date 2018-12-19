@@ -75,7 +75,6 @@ public class MomentServiceImpl implements MomentService {
         person.moments.add(moment);
         personRepository.save(person);
         return ResultBuilder.buildSuccessResult(moment);
-
     }
 
 

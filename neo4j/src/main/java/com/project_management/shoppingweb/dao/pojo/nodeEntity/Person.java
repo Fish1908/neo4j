@@ -20,8 +20,8 @@ public class Person {
   @Relationship(type = "friends",direction = Relationship.UNDIRECTED)
   public Set<Person> friends = new HashSet<Person>();
 
-  @Relationship(type = "Moment")
-  public Set<Moment> moments = new HashSet<>();
+  @Relationship(type = "Viewpyq" , direction = Relationship.OUTGOING)
+  public Set<Moment> moments = new HashSet<Moment>();
 
   private Person() {
     // Empty constructor required as of Neo4j API 2.0.5

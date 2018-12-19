@@ -58,7 +58,7 @@ public class MomentController {
     }
 
     @RequestMapping(value = "/addMoment", method = RequestMethod.POST)
-    public Object addMoment(@RequestBody AddMomentNode addMomentNode) {
+    private Object addMoment(@RequestBody AddMomentNode addMomentNode) {
         return momentService.addMoment(addMomentNode);
     }
 
