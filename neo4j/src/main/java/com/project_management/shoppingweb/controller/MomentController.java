@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller;
 
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.AddMomentNode;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.DeleteMomentNode;
 import com.project_management.shoppingweb.service.MomentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,44 +22,44 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/moment")
 public class MomentController {
 
-  @Autowired
+    @Autowired
 
-  private MomentService momentService;
+    private MomentService momentService;
 
-  @RequestMapping(value = "/insert", method = RequestMethod.POST)
-  public Object insert(@RequestBody Moment moment) {
-    return momentService.insert(moment);
-  }
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public Object insert(@RequestBody Moment moment) {
+        return momentService.insert(moment);
+    }
 
-  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-  public Object delete(@RequestParam("momentId") Long momentId,
-      @RequestParam("personName") String personName) {
-    return momentService.delete(momentId, personName);
-  }
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public Object delete(@RequestBody DeleteMomentNode deleteMomentNode) {
+        return momentService.delete(deleteMomentNode.getId(), deleteMomentNode.getName());
+    }
 
-  @RequestMapping(value = "/update", method = RequestMethod.POST)
-  public Object update(@RequestBody Moment moment) {
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Object update(@RequestBody Moment moment) {
 
-    return momentService.update(moment);
-  }
+        return momentService.update(moment);
+    }
 
-  @RequestMapping(value = "/find", method = RequestMethod.GET)
-  public Object find(@RequestBody Moment moment) {
-    return momentService.find(moment.getMomentId());
-  }
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public Object find(@RequestBody Moment moment) {
+        return momentService.find(moment.getMomentId());
+    }
 
-  @RequestMapping(value = "/findOne", method = RequestMethod.GET)
-  public Object findOne(@RequestParam Long momentId) {
-    return momentService.findOne(momentId);
-  }
+    @RequestMapping(value = "/findOne", method = RequestMethod.GET)
+    public Object findOne(@RequestParam Long momentId) {
+        return momentService.findOne(momentId);
+    }
 
-  @RequestMapping(value = "/findByMomentId", method = RequestMethod.GET)
-  public Object findByName(@RequestParam Long momentId) {
-    return momentService.findByMomentId(momentId);
-  }
+    @RequestMapping(value = "/findByMomentId", method = RequestMethod.GET)
+    public Object findByName(@RequestParam Long momentId) {
+        return momentService.findByMomentId(momentId);
+    }
 
-  @RequestMapping(value = "/addMoment",method = RequestMethod.POST)
-  private Object addMoment(@RequestBody AddMomentNode addMomentNode){
-    return momentService.addMoment(addMomentNode);
-  }
+    @RequestMapping(value = "/addMoment", method = RequestMethod.POST)
+    public Object addMoment(@RequestBody AddMomentNode addMomentNode) {
+        return momentService.addMoment(addMomentNode);
+    }
+
 }
