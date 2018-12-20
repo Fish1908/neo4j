@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -89,11 +86,15 @@ public class MessageServiceImpl implements MessageService {
                     + " name:" + likeNode.getName());
         }
         Set<Message> messages = messageRepository.findByPerson(person.getId());
-        Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+//        Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         for(Message message : messages) {
-            map.put(message.getMomentId(),message.getNameList());
+            Map<String,Object> map = new HashMap<>();
+            map.put("momentId",message.getMomentId());
+            map.put("nameList",message.getNameList());
+            list.add(map);
         }
-        return ResultBuilder.buildSuccessResult(map);
+        return ResultBuilder.buildSuccessResult(list);
     }
 
     @Override
