@@ -4,10 +4,7 @@ import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/person")
@@ -69,5 +66,10 @@ public class PersonController {
     @RequestMapping(value = "/deleteFriend",method = RequestMethod.DELETE)
     public Object deleteFriend(@RequestBody NameNode nameNode){
         return personService.deleteFriend(nameNode);
+    }
+
+    @RequestMapping(value = "viewFriendInformation",method = RequestMethod.GET)
+    public Object viewFriendInformation(@RequestBody NameNode nameNode) {
+        return personService.viewFriendInformation(nameNode);
     }
 }

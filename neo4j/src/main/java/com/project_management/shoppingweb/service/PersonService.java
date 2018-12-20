@@ -19,4 +19,6 @@ public interface PersonService {
 
     public RequestResultVO addfriend(NameNode nameNode);
     public RequestResultVO deleteFriend(NameNode nameNode);
+
+    public Object viewFriendInformation(NameNode nameNode);
 }

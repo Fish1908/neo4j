@@ -112,5 +112,22 @@ public class PersonServiceImpl implements PersonService {
         return ResultBuilder.buildFailResult("你们不是好友");
     }
 
+    @Override
+    public Object viewFriendInformation(NameNode nameNode) {
+        Person me = personRepository.findByName(nameNode.getMyname());
+        Person friend = personRepository.findByName(nameNode.getFriendname());
+        for(Person myfriend : me.friends) {
+            if (myfriend.equals(friend)) {
+                Person information = new Person();
+                information.setName(friend.getName());
+                information.setSex(friend.getSex());
+                information.setClassNumber(friend.getClassNumber());
+                information.moments = friend.moments;
+                return information;
+            }
+        }
+        return ResultBuilder.buildFailResult("你们不是好友");
+    }
+
 
 }
