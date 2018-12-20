@@ -16,7 +16,7 @@ public interface PersonService {
     public RequestResultVO find(Long id);
     public RequestResultVO findByName(String name);
     public RequestResultVO addregister(Person loginPerson);
-
+    public String genCaptcha(String name);
     public RequestResultVO addfriend(NameNode nameNode);
     public RequestResultVO deleteFriend(NameNode nameNode);
 
