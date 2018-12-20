@@ -54,8 +54,8 @@ public interface HttpResponseConstants {
 		public static final String ERROR_902 = "动态不存在";
 		/**此人已给此动态点赞**/
 		public static final String ERROR_903 = "此人已给此动态点赞";
-		/**两次输入密码不一致**/
-		public static final String ERROR_904 = "两次输入密码不一致";
+		/**用户不存在**/
+		public static final String ERROR_904 = "用户不存在";
 		/**登录身份不匹配**/
 		public static final String ERROR_905 = "登录身份不匹配";
 		/**请输入正确身份**/

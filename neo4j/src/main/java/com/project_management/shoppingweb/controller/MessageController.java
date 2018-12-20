@@ -37,7 +37,21 @@ public class MessageController {
         return messageService.addLike(likeNode);
     }
 
+    /**
+     * 查看消息列表
+     */
+    @RequestMapping(value = "/getMessages", method = RequestMethod.POST)
+    public Object getMessages(@RequestBody LikeNode likeNode){
+        return messageService.getMessages(likeNode);
+    }
 
+    /**
+     * 某人确认消息
+     */
+    @RequestMapping(value = "/confirmMessages", method = RequestMethod.POST)
+    public Object confirmMessages(@RequestBody LikeNode likeNode){
+        return messageService.confirmMessages(likeNode);
+    }
 
 
 

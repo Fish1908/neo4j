@@ -23,7 +23,7 @@ public class Person {
   @Relationship(type = "Viewpyq" , direction = Relationship.OUTGOING)
   public Set<Moment> moments = new HashSet<Moment>();
 
-  @Relationship(type = "ckeck" , direction = Relationship.OUTGOING)
+  @Relationship(type = "check" , direction = Relationship.OUTGOING)
   public Set<Message> messages = new HashSet<Message>();
 
   public Person() {

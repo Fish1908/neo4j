@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -35,6 +37,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional
+    /**
+     * 点赞
+     */
     public RequestResultVO addLike(LikeNode likeNode) {
         //参数校验:人不存在、动态不存在、人已给动态点赞
         Person person = personRepository.findByName(likeNode.getName());
@@ -71,5 +76,35 @@ public class MessageServiceImpl implements MessageService {
         }
 
         return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_500);
+    }
+
+    /**
+     * 查看某人对应的所有通知消息
+     */
+    @Override
+    public RequestResultVO getMessages(LikeNode likeNode) {
+        Person person = personRepository.findByName(likeNode.getName());
+        if(person == null) {
+            return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_904
+                    + " name:" + likeNode.getName());
+        }
+        Set<Message> messages = messageRepository.findByPerson(person.getId());
+        Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+        for(Message message : messages) {
+            map.put(message.getMomentId(),message.getNameList());
+        }
+        return ResultBuilder.buildSuccessResult(map);
+    }
+
+    @Override
+    public RequestResultVO confirmMessages(LikeNode likeNode) {
+        Person person = personRepository.findByName(likeNode.getName());
+        if(person == null) {
+            return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_904
+                    + " name:" + likeNode.getName());
+        }
+        Set<Message> messages = messageRepository.findByPerson(person.getId());
+        messageRepository.delete(messages);
+        return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_400);
     }
 }

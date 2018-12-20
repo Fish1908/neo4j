@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface MessageRepository extends GraphRepository<Message> {
     //根据人查询其下面所有通知
-    @Query("match (p: person)-[r:check]->(m: message) where id() return m")
+    @Query("match (p: person)-[r:check]->(m: message) where id(p)={id} return m")
     Set<Message> findByPerson(@Param("id") Long id);
 
     //根据动态id查找通知
