@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.service.PersonService;
@@ -72,4 +73,13 @@ public class PersonController {
     public Object viewFriendInformation(@RequestBody NameNode nameNode) {
         return personService.viewFriendInformation(nameNode);
     }
+
+    /**
+     * 推荐好友
+     */
+    @RequestMapping(value = "/recommend",method = RequestMethod.POST)
+    public Object recommend(@RequestBody LikeNode likeNode){
+        return personService.findMoreFriends(likeNode);
+    }
+
 }

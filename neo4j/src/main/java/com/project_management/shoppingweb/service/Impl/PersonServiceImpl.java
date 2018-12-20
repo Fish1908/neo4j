@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.service.Impl;
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
 import com.project_management.shoppingweb.constant.HttpResponseConstants.Public;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -11,6 +12,8 @@ import com.project_management.shoppingweb.service.common.ResultBuilder;
 import com.project_management.shoppingweb.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -127,6 +130,45 @@ public class PersonServiceImpl implements PersonService {
             }
         }
         return ResultBuilder.buildFailResult("你们不是好友");
+    }
+
+    @Override
+    public RequestResultVO findMoreFriends(LikeNode likeNode) {
+        Person person = personRepository.findByName(likeNode.getName());
+        if(person == null) {
+            return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_904
+                    + " name:" + likeNode.getName());
+        }
+        //好友的好友
+        List<String> moreFriends = personRepository.findMoreFriends(person.getId());
+        //好友
+        List<Person> friends = personRepository.findFriends(person.getId());
+
+        //统计推荐好友的出现次数，去除他本人的好友
+        //存储本人好友的set
+        Set<String> friendsSet = new HashSet<String>();
+        for(Person p : friends) {
+            friendsSet.add(p.getName());
+        }
+        //统计推荐好友的姓名和次数
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        for(String s : moreFriends) {
+            if(!friendsSet.contains(s)) {
+                int count = map.getOrDefault(s, 0);
+                map.put(s, count+1);
+            }
+        }
+
+        //规范输出格式
+        List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            Map<String, Object> temp = new HashMap<String, Object>();
+            temp.put("name", entry.getKey());
+            temp.put("count", entry.getValue());
+            result.add(temp);
+        }
+
+        return ResultBuilder.buildSuccessResult(result);
     }
 
 

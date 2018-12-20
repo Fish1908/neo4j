@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.service;
 
+import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
@@ -21,4 +22,7 @@ public interface PersonService {
     public RequestResultVO deleteFriend(NameNode nameNode);
 
     public Object viewFriendInformation(NameNode nameNode);
+
+    //查找好友的好友
+    public RequestResultVO findMoreFriends(LikeNode likeNode);
 }
