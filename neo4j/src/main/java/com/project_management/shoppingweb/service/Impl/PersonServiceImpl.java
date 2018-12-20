@@ -102,8 +102,8 @@ public class PersonServiceImpl implements PersonService {
     public RequestResultVO deleteFriend(NameNode nameNode) {
         Person me = personRepository.findByName(nameNode.getMyname());
         Person friend = personRepository.findByName(nameNode.getFriendname());
-        for (Person myfriend:me.friends) {
-            if(myfriend.equals(friend)){
+        for (Person myfriend : me.friends) {
+            if (myfriend.equals(friend)) {
                 me.friends.remove(myfriend);
                 personRepository.save(me);
                 return ResultBuilder.buildSuccessResult("删除好友成功");
