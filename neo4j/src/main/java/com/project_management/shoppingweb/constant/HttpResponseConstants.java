@@ -48,14 +48,14 @@ public interface HttpResponseConstants {
 		public static final String ERROR_800 = "未知异常";
 		/**账号或密码错误**/
 		public static final String ERROR_900 = "账号或密码错误";
-		/**账号不存在**/
-		public static final String ERROR_901 = "账号不存在";
+		/**点赞人不存在**/
+		public static final String ERROR_901 = "点赞人不存在";
 		/**密码错误**/
-		public static final String ERROR_902 = "密码错误";
-		/**账号已经存在**/
-		public static final String ERROR_903 = "账号已经存在";
-		/**两次输入密码不一致**/
-		public static final String ERROR_904 = "两次输入密码不一致";
+		public static final String ERROR_902 = "动态不存在";
+		/**此人已给此动态点赞**/
+		public static final String ERROR_903 = "此人已给此动态点赞";
+		/**用户不存在**/
+		public static final String ERROR_904 = "用户不存在";
 		/**登录身份不匹配**/
 		public static final String ERROR_905 = "登录身份不匹配";
 		/**请输入正确身份**/

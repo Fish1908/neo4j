@@ -24,6 +24,9 @@ public class Person implements Serializable {
   @Relationship(type = "Viewpyq" , direction = Relationship.OUTGOING)
   public Set<Moment> moments = new HashSet<Moment>();
 
+  @Relationship(type = "check" , direction = Relationship.OUTGOING)
+  public Set<Message> messages = new HashSet<Message>();
+
   public Person() {
     // Empty constructor required as of Neo4j API 2.0.5
   };
@@ -67,6 +70,30 @@ public class Person implements Serializable {
 
   public void setClassNumber(String classNumber) {
     this.classNumber = classNumber;
+  }
+
+  public Set<Person> getFriends() {
+    return friends;
+  }
+
+  public void setFriends(Set<Person> friends) {
+    this.friends = friends;
+  }
+
+  public Set<Moment> getMoments() {
+    return moments;
+  }
+
+  public void setMoments(Set<Moment> moments) {
+    this.moments = moments;
+  }
+
+  public Set<Message> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(Set<Message> messages) {
+    this.messages = messages;
   }
 
   @Override
