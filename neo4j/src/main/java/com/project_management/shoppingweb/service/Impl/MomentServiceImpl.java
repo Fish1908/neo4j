@@ -77,6 +77,4 @@ public class MomentServiceImpl implements MomentService {
         return ResultBuilder.buildSuccessResult(moment);
     }
 
-
-
 }

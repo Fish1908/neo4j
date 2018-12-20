@@ -66,4 +66,8 @@ public class PersonController {
         return personService.findByName(person.getName());
     }
 
+    @RequestMapping(value = "/deleteFriend",method = RequestMethod.DELETE)
+    public Object deleteFriend(@RequestBody NameNode nameNode){
+        return personService.deleteFriend(nameNode);
+    }
 }

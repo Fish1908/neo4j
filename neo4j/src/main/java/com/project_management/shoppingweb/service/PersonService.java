@@ -18,4 +18,5 @@ public interface PersonService {
     public RequestResultVO addregister(Person loginPerson);
 
     public RequestResultVO addfriend(NameNode nameNode);
+    public RequestResultVO deleteFriend(NameNode nameNode);
 }
