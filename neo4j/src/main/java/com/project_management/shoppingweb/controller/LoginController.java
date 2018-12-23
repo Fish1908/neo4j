@@ -31,11 +31,10 @@ public class LoginController {
    return loginService.login(person);
   }
   @RequestMapping(value="/logout",method = RequestMethod.POST)
-  public Object logout(@RequestParam("name") String name)
+  public Object logout()
   {
-    Subject subject = SecurityUtils.getSubject();
-    subject.logout();
-    return ResultBuilder.buildSuccessResult(Public.SUCCESS_700);
+
+    return loginService.logout();
   }
 
 }

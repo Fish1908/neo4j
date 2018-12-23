@@ -6,5 +6,5 @@ import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 public interface LoginService {
 
    RequestResultVO login(Person person);
-   RequestResultVO logout(Person person);
+   RequestResultVO logout();
 }

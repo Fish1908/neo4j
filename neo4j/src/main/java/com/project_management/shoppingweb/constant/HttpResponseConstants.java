@@ -25,9 +25,9 @@ public interface HttpResponseConstants {
 		/**登录成功**/
 		public static final String SUCCESS_600 = "登录成功";
 		/**验证短信发送成功**/
-		public static final String SUCCESS_601 = "验证短信发送成功";
+		public static final String SUCCESS_601 = "验证邮件发送成功";
 		/**登录成功**/
-		public static final String SUCCESS_700 = "注销成功";
+		public static final String SUCCESS_700 = "登出成功";
 		/**error**/
 		public static final String ERROR = "error";
 		/**查询失败 **/
@@ -61,7 +61,7 @@ public interface HttpResponseConstants {
 		/**请输入正确身份**/
 		public static final String ERROR_906 = "请输入正确身份";
 		/**发送验证码失败**/
-		public static final String ERROR_907 = "发送验证码失败";
+		public static final String ERROR_907 = "验证邮件发送失败";
 		/**请先获取验证码**/
 		public static final String ERROR_908 = "请先获取验证码";
 		/**请输入正确的验证码**/

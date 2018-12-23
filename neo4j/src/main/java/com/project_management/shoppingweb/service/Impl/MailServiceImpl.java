@@ -1,7 +1,10 @@
 package com.project_management.shoppingweb.service.Impl;
 
 
+import com.project_management.shoppingweb.constant.HttpResponseConstants.Public;
+import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.service.MailService;
+import com.project_management.shoppingweb.service.common.ResultBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ public class MailServiceImpl implements MailService {
     private String from;
 
     @Override
-    public void sengSimpleMail(String to, String subject, String content) {
+    public RequestResultVO sengSimpleMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -32,8 +35,10 @@ public class MailServiceImpl implements MailService {
         try {
             mailSender.send(message);
             logger.info("Success: send simple mail.");
+            return ResultBuilder.buildSuccessResult(Public.SUCCESS_601);
         } catch (Exception e) {
             logger.error("Fail: send simple mail.", e);
+            return ResultBuilder.buildFailResult(Public.ERROR_907);
         }
     }
 }

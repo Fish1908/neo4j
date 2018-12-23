@@ -10,9 +10,12 @@ import com.project_management.shoppingweb.dao.repository.PersonRepository;
 import com.project_management.shoppingweb.service.PersonService;
 import com.project_management.shoppingweb.service.common.ResultBuilder;
 import com.project_management.shoppingweb.util.MD5Util;
+import java.text.DecimalFormat;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.http.client.methods.RequestBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,6 +25,8 @@ public class PersonServiceImpl implements PersonService {
 
   @Autowired
   private PersonRepository personRepository;
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
   @Override
   public RequestResultVO insert(Person person) {
@@ -94,8 +99,18 @@ public class PersonServiceImpl implements PersonService {
   @Cacheable(value = "captcha")
   public String genCaptcha(String name) {
     System.out.println("未使用redis!");
-     Integer code= RandomUtils.nextInt(0,9999);
-    return code.toString();
+    String code = new DecimalFormat("0000").format(RandomUtils.nextInt(0,9999));
+    return code;
+  }
+
+  public boolean validCaptcha(String name, String actual)
+  {
+    String expect = stringRedisTemplate.opsForValue().get(name);
+
+    if(expect!=null&&expect.equals(actual)){
+      return true;
+    }
+    return false;
   }
 
 

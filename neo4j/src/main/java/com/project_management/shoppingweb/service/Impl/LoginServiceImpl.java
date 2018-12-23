@@ -51,8 +51,10 @@ public class LoginServiceImpl implements LoginService {
   }
 
   @Override
-  public RequestResultVO logout(Person person) {
+  public RequestResultVO logout() {
 
+    Subject subject = SecurityUtils.getSubject();
+    subject.logout();
     return ResultBuilder.buildSuccessResult(Public.SUCCESS_700);
   }
 }
