@@ -22,6 +22,8 @@ public interface HttpResponseConstants {
 		public static final String SUCCESS_400 = "删除成功";
 		/**操作成功**/
 		public static final String SUCCESS_500 = "操作成功";
+		/**取消点赞，点赞减一**/
+		public static final String SUCCESS_501 = "取消点赞，点赞减一";
 		/**登录成功**/
 		public static final String SUCCESS_600 = "登录成功";
 		/**验证短信发送成功**/
