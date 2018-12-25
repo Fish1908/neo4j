@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.service.common;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
+import com.project_management.shoppingweb.dao.pojo.vo.MomentResultVO;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 
 
@@ -38,7 +39,8 @@ public class ResultBuilder {
         response.setMessage(HttpResponseConstants.Public.SUCCESS);
         return response;
     }
-    
+
+
     public static RequestResultVO buildSuccessResult() {
     	return buildSuccessResult(null);
     }

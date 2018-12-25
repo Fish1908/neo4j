@@ -7,6 +7,7 @@ import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.AddMomentNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.DeleteMomentNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.ViewAllMomentsNode;
+import com.project_management.shoppingweb.dao.pojo.vo.MomentResultVO;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.MomentRepository;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -89,19 +92,21 @@ public class MomentServiceImpl implements MomentService {
     @Override
     public RequestResultVO viewAllMoments(ViewAllMomentsNode viewAllMomentsNode) {
         Person me = personRepository.findTopByName(viewAllMomentsNode.getMyName());
-        ArrayList<Person> myFriends = new ArrayList<Person>();
+        ArrayList<MomentResultVO> momentResultVOS = new ArrayList<MomentResultVO>();
         for (Person friend:
              me.friends) {
-            Person information = new Person();
-            Person tempFriend = personRepository.findTopByName(friend.getName());
-            information.setName(tempFriend.getName());
-            information.setSex(tempFriend.getSex());
-            information.setClassNumber(tempFriend.getClassNumber());
-            information.setIconId(tempFriend.getIconId());
-            information.moments = tempFriend.moments;
-            myFriends.add(information);
+            Person person = personRepository.findTopByName(friend.getName());
+            for (Moment moment:
+                 person.moments) {
+                MomentResultVO momentResultVO = new MomentResultVO();
+                momentResultVO.setName(person.getName());
+                momentResultVO.setMoment(moment);
+                momentResultVOS.add(momentResultVO);
+            }
+
         }
-        return ResultBuilder.buildSuccessResult(myFriends);
+        Collections.sort(momentResultVOS);
+        return ResultBuilder.buildSuccessResult(momentResultVOS);
     }
 
 }
