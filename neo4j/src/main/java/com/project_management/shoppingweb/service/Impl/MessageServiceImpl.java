@@ -38,7 +38,7 @@ public class MessageServiceImpl implements MessageService {
      * 点赞
      */
     public RequestResultVO addLike(LikeNode likeNode) {
-        //参数校验:人不存在、动态不存在、人已给动态点赞
+        //参数校验:人不存在、动态不存在
         Person person = personRepository.findByName(likeNode.getName());
         if(person == null) {
             return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_901
@@ -49,8 +49,29 @@ public class MessageServiceImpl implements MessageService {
             return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_902
                     + " momentId:" + likeNode.getId());
         }
+
+        Person likedPerson = personRepository.findByMoment(moment.getMomentId());
+
+        //如果已经点赞，则取消点赞
         if(moment.getLikeList().contains(person.getName())) {
-            return ResultBuilder.buildFailResult(HttpResponseConstants.Public.ERROR_903);
+            moment.getLikeList().remove(person.getName());
+            momentRepository.save(moment);
+
+            //同时取消相应的通知消息
+            Set<Message> messages = messageRepository.findByPerson(likedPerson.getId());
+            for(Message message : messages) {
+                //该通知只有这一个人，则删除通知；否则移除名字
+                if(message.getMomentId().equals(likeNode.getId()) && message.getNameList().contains(person.getName())) {
+                    message.getNameList().remove(person.getName());
+                    if(message.getNameList().size() == 0) {
+                        messageRepository.delete(message);
+                    } else {
+                        messageRepository.save(message);
+                    }
+                    break;
+                }
+            }
+            return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_501);
         }
 
         //动态点赞列表添加姓名
@@ -59,7 +80,7 @@ public class MessageServiceImpl implements MessageService {
 
         //在此人通知列表添加此条点赞信息
         //根据动态id找到发动态人，判断是否已有该动态对应的通知，有则直接在通知中加入name，没有则先创建
-        Person likedPerson = personRepository.findByMoment(moment.getMomentId());
+//        Person likedPerson = personRepository.findByMoment(moment.getMomentId());
         Message message = messageRepository.findByMoment(moment.getMomentId());
         if(message == null) {
             message = new Message();
@@ -68,8 +89,10 @@ public class MessageServiceImpl implements MessageService {
             likedPerson.getMessages().add(message);
             personRepository.save(likedPerson);
         } else{
-            message.getNameList().add(person.getName());
-            messageRepository.save(message);
+            if(!message.getNameList().contains(person.getName())) {
+                message.getNameList().add(person.getName());
+                messageRepository.save(message);
+            }
         }
 
         return ResultBuilder.buildSuccessResult(HttpResponseConstants.Public.SUCCESS_500);
