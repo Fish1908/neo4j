@@ -12,6 +12,4 @@ public interface MomentRepository extends GraphRepository <Moment>{
   Moment findByMomentId(Long momentId);
 
 
-
-
 }
