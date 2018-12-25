@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.controller;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants.Public;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
@@ -106,10 +107,18 @@ public class PersonController {
     return personService.deleteFriend(nameNode);
   }
 
+  /**
+   * 查看好友信息
+   * @param nameNode
+   * @return
+   */
   @RequestMapping(value = "/viewFriendInformation", method = RequestMethod.GET)
   public Object viewFriendInformation(@RequestBody NameNode nameNode) {
     return personService.viewFriendInformation(nameNode);
   }
+
+
+
 
   /**
    * 推荐好友

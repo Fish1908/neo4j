@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.controller;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.AddMomentNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.DeleteMomentNode;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.ViewAllMomentsNode;
 import com.project_management.shoppingweb.service.MomentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,11 @@ public class MomentController {
     @RequestMapping(value = "/addMoment", method = RequestMethod.POST)
     private Object addMoment(@RequestBody AddMomentNode addMomentNode) {
         return momentService.addMoment(addMomentNode);
+    }
+
+    @RequestMapping(value = "/viewAllMoments",method = RequestMethod.GET)
+    public Object viewAllMoments(@RequestBody ViewAllMomentsNode viewAllMomentsNode){
+        return momentService.viewAllMoments(viewAllMomentsNode);
     }
 
 }

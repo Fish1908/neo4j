@@ -6,6 +6,7 @@ import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.AddMomentNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.DeleteMomentNode;
+import com.project_management.shoppingweb.dao.pojo.requestEntity.ViewAllMomentsNode;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.MomentRepository;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -82,6 +84,24 @@ public class MomentServiceImpl implements MomentService {
         person.moments.add(moment);
         personRepository.save(person);
         return ResultBuilder.buildSuccessResult(moment);
+    }
+
+    @Override
+    public RequestResultVO viewAllMoments(ViewAllMomentsNode viewAllMomentsNode) {
+        Person me = personRepository.findTopByName(viewAllMomentsNode.getMyName());
+        ArrayList<Person> myFriends = new ArrayList<Person>();
+        for (Person friend:
+             me.friends) {
+            Person information = new Person();
+            Person tempFriend = personRepository.findTopByName(friend.getName());
+            information.setName(tempFriend.getName());
+            information.setSex(tempFriend.getSex());
+            information.setClassNumber(tempFriend.getClassNumber());
+            information.setIconId(tempFriend.getIconId());
+            information.moments = tempFriend.moments;
+            myFriends.add(information);
+        }
+        return ResultBuilder.buildSuccessResult(myFriends);
     }
 
 }
