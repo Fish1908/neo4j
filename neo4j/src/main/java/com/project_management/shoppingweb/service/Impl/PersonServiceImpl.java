@@ -143,14 +143,15 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Object viewFriendInformation(NameNode nameNode) {
-        Person me = personRepository.findByName(nameNode.getMyname());
-        Person friend = personRepository.findByName(nameNode.getFriendname());
+        Person me = personRepository.findTopByName(nameNode.getMyname());
+        Person friend = personRepository.findTopByName(nameNode.getFriendname());
         for(Person myfriend : me.friends) {
             if (myfriend.equals(friend)) {
                 Person information = new Person();
                 information.setName(friend.getName());
                 information.setSex(friend.getSex());
                 information.setClassNumber(friend.getClassNumber());
+                information.setIconId(friend.getIconId());
                 information.moments = friend.moments;
                 return information;
             }

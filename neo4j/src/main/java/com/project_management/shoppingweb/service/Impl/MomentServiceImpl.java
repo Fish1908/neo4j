@@ -14,6 +14,9 @@ import com.project_management.shoppingweb.service.common.ResultBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @ClassName MomentServiceImpl
  * @Description TODO
@@ -70,6 +73,10 @@ public class MomentServiceImpl implements MomentService {
 
     @Override
     public RequestResultVO addMoment(AddMomentNode addMomentNode) {
+        Date current = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = simpleDateFormat.format(current);
+        addMomentNode.getMoment().setDate(dateString);
         Moment moment = momentRepository.save(addMomentNode.getMoment());
         Person person = personRepository.findByName(addMomentNode.getName());
         person.moments.add(moment);

@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.dao.pojo.nodeEntity;
 
 import java.io.Serializable;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -11,101 +12,114 @@ import java.util.Set;
 @NodeEntity(label = "person")
 public class Person implements Serializable {
 
-  @GraphId
-  private Long id;
-  private String name;
-  private String password;
-  private String sex;
-  private String classNumber;
-
-  @Relationship(type = "friends",direction = Relationship.UNDIRECTED)
-  public Set<Person> friends = new HashSet<Person>();
-
-  @Relationship(type = "Viewpyq" , direction = Relationship.OUTGOING)
-  public Set<Moment> moments = new HashSet<Moment>();
-
-  @Relationship(type = "check" , direction = Relationship.OUTGOING)
-  public Set<Message> messages = new HashSet<Message>();
-
-  public Person() {
-    // Empty constructor required as of Neo4j API 2.0.5
-  };
+    @GraphId
+    private Long id;
+    private String name;
+    private String password;
+    private String sex;
+    private String classNumber;
+    //头像id
+    private String iconId;
 
 
-  public Long getId() {
-    return id;
-  }
+    @Relationship(type = "friends", direction = Relationship.UNDIRECTED)
+    public Set<Person> friends = new HashSet<Person>();
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    @Relationship(type = "Viewpyq", direction = Relationship.OUTGOING)
+    public Set<Moment> moments = new HashSet<Moment>();
 
-  public String getName() {
-    return name;
-  }
+    @Relationship(type = "check", direction = Relationship.OUTGOING)
+    public Set<Message> messages = new HashSet<Message>();
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public Person() {
+        // Empty constructor required as of Neo4j API 2.0.5
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    ;
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
 
-  public String getSex() {
-    return sex;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setSex(String sex) {
-    this.sex = sex;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getClassNumber() {
-    return classNumber;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setClassNumber(String classNumber) {
-    this.classNumber = classNumber;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public Set<Person> getFriends() {
-    return friends;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setFriends(Set<Person> friends) {
-    this.friends = friends;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public Set<Moment> getMoments() {
-    return moments;
-  }
+    public String getSex() {
+        return sex;
+    }
 
-  public void setMoments(Set<Moment> moments) {
-    this.moments = moments;
-  }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-  public Set<Message> getMessages() {
-    return messages;
-  }
+    public String getClassNumber() {
+        return classNumber;
+    }
 
-  public void setMessages(Set<Message> messages) {
-    this.messages = messages;
-  }
+    public void setClassNumber(String classNumber) {
+        this.classNumber = classNumber;
+    }
 
-  @Override
-  public String toString() {
-    return "Person{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", password='" + password + '\'' +
-        ", sex='" + sex + '\'' +
-        ", classNumber='" + classNumber + '\'' +
-        '}';
-  }
+    public Set<Person> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<Person> friends) {
+        this.friends = friends;
+    }
+
+    public Set<Moment> getMoments() {
+        return moments;
+    }
+
+    public void setMoments(Set<Moment> moments) {
+        this.moments = moments;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public String getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(String iconId) {
+        this.iconId = iconId;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", classNumber='" + classNumber + '\'' +
+                '}';
+    }
 
 
 }

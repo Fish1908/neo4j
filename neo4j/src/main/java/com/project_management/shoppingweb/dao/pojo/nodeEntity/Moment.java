@@ -1,7 +1,9 @@
 package com.project_management.shoppingweb.dao.pojo.nodeEntity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -15,41 +17,50 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @NodeEntity(label = "moment")
 public class Moment {
 
-  @GraphId
-  private Long momentId;
-  private String pictureUrl;
-  private String content;
-  private List<String> likeList = new ArrayList<>();
+    @GraphId
+    private Long momentId;
+    private String pictureUrl;
+    private String content;
+    private String date;
+    private List<String> likeList = new ArrayList<>();
 
-  public Long getMomentId() {
-    return momentId;
-  }
+    public Long getMomentId() {
+        return momentId;
+    }
 
-  public void setMomentId(Long momentId) {
-    this.momentId = momentId;
-  }
+    public void setMomentId(Long momentId) {
+        this.momentId = momentId;
+    }
 
-  public String getPictureUrl() {
-    return pictureUrl;
-  }
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
 
-  public void setPictureUrl(String pictureUrl) {
-    this.pictureUrl = pictureUrl;
-  }
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
-  public String getContent() {
-    return content;
-  }
+    public String getContent() {
+        return content;
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-  public List<String> getLikeList() {
-    return likeList;
-  }
+    public List<String> getLikeList() {
+        return likeList;
+    }
 
-  public void setLikeList(List<String> likeList) {
-    this.likeList = likeList;
-  }
+    public void setLikeList(List<String> likeList) {
+        this.likeList = likeList;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

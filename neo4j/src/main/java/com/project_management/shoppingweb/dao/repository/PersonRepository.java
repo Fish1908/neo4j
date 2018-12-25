@@ -15,6 +15,8 @@ public interface PersonRepository extends GraphRepository<Person>{
     @Query("match (p:person) where p.name={name} return p")
     Person findByName(@Param("name") String name);
 
+    Person findTopByName(String name);
+
     @Query("match (p1:person{name:{0}})-[f:friends]->(p2:person) DELETE p1,f")
     void delete(String name);
 
