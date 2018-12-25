@@ -50,7 +50,8 @@ public class MomentResultVO implements java.io.Serializable, Comparable<MomentRe
     public int compareTo(MomentResultVO momentResultVO) {
         if (this.getMoment().getDate()!=null && (momentResultVO.getMoment().getDate())!=null)
         return this.getMoment().getDate().compareTo(momentResultVO.getMoment().getDate());
-        else
+        else if (this.getMoment().getDate()!=null) {
             return 1;
+        }else return -1;
     }
 }

@@ -100,7 +100,9 @@ public class MomentServiceImpl implements MomentService {
                  person.moments) {
                 MomentResultVO momentResultVO = new MomentResultVO();
                 momentResultVO.setName(person.getName());
-                momentResultVO.setMoment(moment);
+                Moment tempMoment = new Moment();
+                tempMoment = moment;
+                momentResultVO.setMoment(tempMoment);
                 momentResultVOS.add(momentResultVO);
             }
 
