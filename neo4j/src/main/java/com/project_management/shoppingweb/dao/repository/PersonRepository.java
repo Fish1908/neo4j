@@ -35,4 +35,6 @@ public interface PersonRepository extends GraphRepository<Person>{
     @Query("MATCH (a:person )-[:friends]-(b:person) where id(a)={id} return b")
     List<Person> findFriends(@Param("id") Long id);
 
+    @Query("MATCH (n:person) RETURN n")
+    List<Person> findAllPeople();
 }

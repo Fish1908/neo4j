@@ -48,10 +48,12 @@ public class MomentResultVO implements java.io.Serializable, Comparable<MomentRe
 
     @Override
     public int compareTo(MomentResultVO momentResultVO) {
-        if (this.getMoment().getDate()!=null && (momentResultVO.getMoment().getDate())!=null)
-        return this.getMoment().getDate().compareTo(momentResultVO.getMoment().getDate());
-        else if (this.getMoment().getDate()!=null) {
+        if (this.getMoment().getDate() != null && (momentResultVO.getMoment().getDate()) != null)
+            return momentResultVO.getMoment().getDate().compareTo(this.getMoment().getDate());
+        else if (this.getMoment().getDate() != null && (momentResultVO.getMoment().getDate()) == null) {
+            return -1;
+        } else if (this.getMoment().getDate() == null && (momentResultVO.getMoment().getDate()) != null)
             return 1;
-        }else return -1;
+        else return 0;
     }
 }

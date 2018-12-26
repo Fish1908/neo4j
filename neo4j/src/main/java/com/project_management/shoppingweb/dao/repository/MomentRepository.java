@@ -11,5 +11,4 @@ public interface MomentRepository extends GraphRepository <Moment>{
 //  @Query("MATCH (m:moment) where id(m)={0} return m")
   Moment findByMomentId(Long momentId);
 
-
 }

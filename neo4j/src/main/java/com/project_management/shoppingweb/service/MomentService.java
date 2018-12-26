@@ -18,5 +18,6 @@ public interface MomentService {
   public RequestResultVO addMoment(AddMomentNode addMomentNode);
   public RequestResultVO viewAllMoments(ViewAllMomentsNode viewAllMomentsNode);
 
+  public RequestResultVO viewAllRepositoryMoments();
 
 }

@@ -68,4 +68,8 @@ public class MomentController {
         return momentService.viewAllMoments(viewAllMomentsNode);
     }
 
+    @RequestMapping(value = "/viewAllRepositoryMoments",method = RequestMethod.GET)
+    public Object viewAllRepositoryMoments(){
+        return momentService.viewAllRepositoryMoments();
+    }
 }

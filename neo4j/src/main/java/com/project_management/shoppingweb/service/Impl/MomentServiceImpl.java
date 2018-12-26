@@ -17,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @ClassName MomentServiceImpl
@@ -37,6 +34,7 @@ public class MomentServiceImpl implements MomentService {
 
     @Autowired
     private PersonRepository personRepository;
+
     @Override
     public RequestResultVO insert(Moment moment) {
         Moment res = momentRepository.save(moment);
@@ -93,11 +91,11 @@ public class MomentServiceImpl implements MomentService {
     public RequestResultVO viewAllMoments(ViewAllMomentsNode viewAllMomentsNode) {
         Person me = personRepository.findTopByName(viewAllMomentsNode.getMyName());
         ArrayList<MomentResultVO> momentResultVOS = new ArrayList<MomentResultVO>();
-        for (Person friend:
-             me.friends) {
+        for (Person friend :
+                me.friends) {
             Person person = personRepository.findTopByName(friend.getName());
-            for (Moment moment:
-                 person.moments) {
+            for (Moment moment :
+                    person.moments) {
                 MomentResultVO momentResultVO = new MomentResultVO();
                 momentResultVO.setName(person.getName());
                 Moment tempMoment = new Moment();
@@ -106,6 +104,27 @@ public class MomentServiceImpl implements MomentService {
                 momentResultVOS.add(momentResultVO);
             }
 
+        }
+        Collections.sort(momentResultVOS);
+        return ResultBuilder.buildSuccessResult(momentResultVOS);
+    }
+
+    @Override
+    public RequestResultVO viewAllRepositoryMoments() {
+        List<Person> allPeople = personRepository.findAllPeople();
+        ArrayList<MomentResultVO> momentResultVOS = new ArrayList<>();
+        for (Person person :
+                allPeople) {
+            Person tempPerson = personRepository.findTopByName(person.getName());
+            for (Moment moment :
+                    person.moments) {
+                MomentResultVO momentResultVO = new MomentResultVO();
+                momentResultVO.setName(tempPerson.getName());
+                Moment tempMoment = new Moment();
+                tempMoment = moment;
+                momentResultVO.setMoment(tempMoment);
+                momentResultVOS.add(momentResultVO);
+            }
         }
         Collections.sort(momentResultVOS);
         return ResultBuilder.buildSuccessResult(momentResultVOS);
