@@ -1,20 +1,24 @@
 package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.LikeTime;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Message;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
+import com.project_management.shoppingweb.dao.repository.LikeTimeRepository;
 import com.project_management.shoppingweb.dao.repository.MessageRepository;
 import com.project_management.shoppingweb.dao.repository.MomentRepository;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
 import com.project_management.shoppingweb.service.MessageService;
 import com.project_management.shoppingweb.service.common.ResultBuilder;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -25,6 +29,8 @@ public class MessageServiceImpl implements MessageService {
     private PersonRepository personRepository;
     @Autowired
     private MomentRepository momentRepository;
+    @Autowired
+    private LikeTimeRepository likeTimeRepository;
 
     @Override
     public RequestResultVO insert(Message message) {
@@ -81,6 +87,18 @@ public class MessageServiceImpl implements MessageService {
         //在此人通知列表添加此条点赞信息
         //根据动态id找到发动态人，判断是否已有该动态对应的通知，有则直接在通知中加入name，没有则先创建
 //        Person likedPerson = personRepository.findByMoment(moment.getMomentId());
+
+        LikeTime likeTime = likeTimeRepository.findByMoment(likeNode.getName(), likeNode.getId());
+        if(likeTime != null) {
+            likeTime.setTime(new Date());
+        } else {
+            likeTime = new LikeTime();
+            likeTime.setName(likeNode.getName());
+            likeTime.setMomentId(likeNode.getId());
+            likeTime.setTime(new Date());
+        }
+        likeTimeRepository.save(likeTime);
+
         Message message = messageRepository.findByMoment(moment.getMomentId());
         if(message == null) {
             message = new Message();
@@ -109,13 +127,30 @@ public class MessageServiceImpl implements MessageService {
                     + " name:" + likeNode.getName());
         }
         Set<Message> messages = messageRepository.findByPerson(person.getId());
-//        Map<Long, List<String>> map = new HashMap<Long, List<String>>();
+        Map<String, Object> map = new HashMap<String, Object>();
         List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
         for(Message message : messages) {
-            Map<String,Object> map = new HashMap<>();
+            Map<String, Date> likeMap = new HashMap<String, Date>();
+            List<Map<String, Object>> likeList = new ArrayList<Map<String, Object>>();
             map.put("momentId",message.getMomentId());
-            map.put("nameList",message.getNameList());
-            list.add(map);
+            for(String name : message.getNameList()) {
+                LikeTime likeTime = likeTimeRepository.findByMoment(name, message.getMomentId());
+                if(likeTime != null) {
+                    Map<String, Object> map1  = new HashMap<String, Object>();
+                    map1.put("name", likeTime.getName());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String dateString = simpleDateFormat.format(likeTime.getTime());
+                    map1.put("time", dateString);
+                    likeList.add(new HashMap<>(map1));
+                } else {
+                    Map<String, Object> map1  = new HashMap<String, Object>();
+                    map1.put("name", name);
+                    map1.put("time", null);
+                    likeList.add(new HashMap<>(map1));
+                }
+            }
+            map.put("likeList",likeList);
+            list.add(new HashMap<>(map));
         }
         return ResultBuilder.buildSuccessResult(list);
     }
