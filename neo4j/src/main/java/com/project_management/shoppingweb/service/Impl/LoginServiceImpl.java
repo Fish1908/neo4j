@@ -14,6 +14,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -46,7 +47,8 @@ public class LoginServiceImpl implements LoginService {
       return ResultBuilder.buildFailResult(Public.ERROR_902);
 
     }
-    return ResultBuilder.buildSuccessResult(Public.SUCCESS_600);
+    String iconid =  personRepository.findByName(LoginName).getIconId();
+    return ResultBuilder.buildSuccessResult(Public.SUCCESS_600,iconid);
 
   }
 
