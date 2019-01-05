@@ -47,7 +47,7 @@ public class PersonController {
    */
 
 
-  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/delete", method = RequestMethod.POST)
   public Object delete(@RequestBody() Person person) {
 
     return personService.delete(person.getName());
@@ -102,7 +102,7 @@ public class PersonController {
     return personService.findByName(person.getName());
   }
 
-  @RequestMapping(value = "/deleteFriend", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/deleteFriend", method = RequestMethod.POST)
   public Object deleteFriend(@RequestBody NameNode nameNode) {
     return personService.deleteFriend(nameNode);
   }
@@ -112,7 +112,7 @@ public class PersonController {
    * @param nameNode
    * @return
    */
-  @RequestMapping(value = "/viewFriendInformation", method = RequestMethod.GET)
+  @RequestMapping(value = "/viewFriendInformation", method = RequestMethod.POST)
   public Object viewFriendInformation(@RequestBody NameNode nameNode) {
     return personService.viewFriendInformation(nameNode);
   }
