@@ -145,17 +145,24 @@ public class PersonServiceImpl implements PersonService {
     public Object viewFriendInformation(NameNode nameNode) {
         Person me = personRepository.findTopByName(nameNode.getMyname());
         Person friend = personRepository.findTopByName(nameNode.getFriendname());
-        for(Person myfriend : me.friends) {
+        for(Person myfriend : me.friends)
             if (myfriend.equals(friend)) {
                 Person information = new Person();
                 information.setName(friend.getName());
                 information.setSex(friend.getSex());
                 information.setClassNumber(friend.getClassNumber());
+                Set<Person> tempFriends = new HashSet<>();
+                for (String friendName:
+                        personRepository.findMoreFriends(friend.getId())) {
+                    Person tempFriend = new Person();
+                    tempFriend.setName(friendName);
+                    tempFriends.add(tempFriend);
+                }
+                information.setFriends(tempFriends);
                 information.setIconId(friend.getIconId());
                 information.moments = friend.moments;
                 return information;
             }
-        }
         return ResultBuilder.buildFailResult("你们不是好友");
     }
 
