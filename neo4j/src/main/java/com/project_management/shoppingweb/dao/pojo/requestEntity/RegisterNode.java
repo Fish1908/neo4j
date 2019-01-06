@@ -13,6 +13,15 @@ public class RegisterNode {
   private String sex;
   private String classNumber;
   private String captcha;
+  private String iconid;
+
+  public String getIconid() {
+    return iconid;
+  }
+
+  public void setIconid(String iconid) {
+    this.iconid = iconid;
+  }
 
   public String getCaptcha() {
     return captcha;

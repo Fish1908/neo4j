@@ -79,6 +79,7 @@ public class PersonController {
     loginPerson.setSex(registerNode.getSex());
     loginPerson.setPassword(registerNode.getPassword());
     loginPerson.setClassNumber(registerNode.getClassNumber());
+    loginPerson.setIconId(registerNode.getIconid());
     return personService.addregister(loginPerson);
   }
 
