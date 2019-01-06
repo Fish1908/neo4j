@@ -52,7 +52,8 @@ public class PersonServiceImpl implements PersonService {
     String sex = person.getSex() != null ? person.getSex() : old.getSex();
     String classNumber =
         person.getClassNumber() != null ? person.getClassNumber() : old.getClassNumber();
-    personRepository.update(id, name, password, sex, classNumber);
+    String iconId = person.getIconId()!=null ?person.getIconId():old.getIconId();
+    personRepository.update(id, name, password, sex, classNumber,iconId);
     return ResultBuilder.buildSuccessResult(Public.SUCCESS_300, person);
   }
 
@@ -199,6 +200,7 @@ public class PersonServiceImpl implements PersonService {
             Map<String, Object> temp = new HashMap<String, Object>();
             temp.put("name", entry.getKey());
             temp.put("count", entry.getValue());
+            temp.put("iconId",personRepository.findByName(entry.getKey()).getIconId());
             result.add(temp);
         }
 
