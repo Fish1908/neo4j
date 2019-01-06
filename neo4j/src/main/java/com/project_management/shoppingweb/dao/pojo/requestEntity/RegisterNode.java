@@ -13,13 +13,13 @@ public class RegisterNode {
   private String sex;
   private String classNumber;
   private String captcha;
-  private String iconid;
+  private Long iconid;
 
-  public String getIconid() {
+  public Long getIconid() {
     return iconid;
   }
 
-  public void setIconid(String iconid) {
+  public void setIconid(Long iconid) {
     this.iconid = iconid;
   }
 

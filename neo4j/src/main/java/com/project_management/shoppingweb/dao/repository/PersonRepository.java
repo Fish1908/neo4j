@@ -21,7 +21,7 @@ public interface PersonRepository extends GraphRepository<Person>{
     void delete(String name);
 
         @Query("match (p:person) where id(p)={0} set p={name:{1},password:{2},sex:{3},classNumber:{4},iconId:{5}}")
-    Person update(Long id,String name,String password,String sex,String classNumber,String iconId);
+    Person update(Long id,String name,String password,String sex,String classNumber,Long iconId);
 
     //根据动态查人
     @Query("match (p: person)-[r:Viewpyq]->(m: moment) where id(m)={id} return p")

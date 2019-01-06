@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
       return ResultBuilder.buildFailResult(Public.ERROR_902);
 
     }
-    String iconid =  personRepository.findByName(LoginName).getIconId();
+    Long iconid =  personRepository.findByName(LoginName).getIconId();
     return ResultBuilder.buildSuccessResult(Public.SUCCESS_600,iconid);
 
   }

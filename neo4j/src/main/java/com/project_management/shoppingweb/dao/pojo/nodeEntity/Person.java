@@ -19,7 +19,7 @@ public class Person implements Serializable {
     private String sex;
     private String classNumber;
     //头像id
-    private String iconId;
+    private Long iconId;
 
 
     @Relationship(type = "friends", direction = Relationship.UNDIRECTED)
@@ -102,11 +102,11 @@ public class Person implements Serializable {
         this.messages = messages;
     }
 
-    public String getIconId() {
+    public Long getIconId() {
         return iconId;
     }
 
-    public void setIconId(String iconId) {
+    public void setIconId(Long iconId) {
         this.iconId = iconId;
     }
 
