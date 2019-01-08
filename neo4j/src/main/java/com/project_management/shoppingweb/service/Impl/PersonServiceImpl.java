@@ -2,9 +2,11 @@ package com.project_management.shoppingweb.service.Impl;
 
 import com.project_management.shoppingweb.constant.HttpResponseConstants;
 import com.project_management.shoppingweb.constant.HttpResponseConstants.Public;
+import com.project_management.shoppingweb.dao.pojo.nodeEntity.Moment;
 import com.project_management.shoppingweb.dao.pojo.nodeEntity.Person;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.LikeNode;
 import com.project_management.shoppingweb.dao.pojo.requestEntity.NameNode;
+import com.project_management.shoppingweb.dao.pojo.vo.LikeListResultVO;
 import com.project_management.shoppingweb.dao.pojo.vo.RequestResultVO;
 import com.project_management.shoppingweb.dao.repository.PersonRepository;
 import com.project_management.shoppingweb.service.PersonService;
@@ -146,6 +148,7 @@ public class PersonServiceImpl implements PersonService {
     public Object viewFriendInformation(NameNode nameNode) {
         Person me = personRepository.findTopByName(nameNode.getMyname());
         Person friend = personRepository.findTopByName(nameNode.getFriendname());
+        Map<String, Object> result = new HashMap<>();
         for(Person myfriend : me.friends)
             if (myfriend.equals(friend)) {
                 Person information = new Person();
@@ -161,8 +164,34 @@ public class PersonServiceImpl implements PersonService {
                 }
                 information.setFriends(tempFriends);
                 information.setIconId(friend.getIconId());
-                information.moments = friend.moments;
-                return information;
+                Set<LikeListResultVO> likeListResultVOS = new HashSet<LikeListResultVO>();
+                for (Moment moment:
+                     friend.moments) {
+                    LikeListResultVO likeListResultVO = new LikeListResultVO();
+                    likeListResultVO.setContent(moment.getContent());
+                    likeListResultVO.setDate(moment.getDate());
+                    likeListResultVO.setMomentId(moment.getMomentId());
+                    likeListResultVO.setPictureUrl(moment.getPictureUrl());
+                    List<Map<String,Object>> likeList = new ArrayList<>();
+                    for (String person:
+                         moment.getLikeList()) {
+                        String name = person;
+                        Person person1 = personRepository.findByName(person);
+                        Long iconId;
+                        if (person1 == null)
+                            iconId = null;
+                        else iconId = person1.getIconId();
+                        Map<String,Object> temp = new HashMap<>();
+                        temp.put("name",name);
+                        temp.put("iconId",iconId);
+                        likeList.add(temp);
+                    }
+                    likeListResultVO.setLikeList(likeList);
+                    likeListResultVOS.add(likeListResultVO);
+                    result.put("person",information);
+                    result.put("moment",likeListResultVOS);
+                }
+                return result;
             }
         return ResultBuilder.buildFailResult("你们不是好友");
     }
